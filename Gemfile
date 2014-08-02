@@ -10,8 +10,10 @@ gem 'pg'
 gem 'devise'
 gem 'omniauth', '>= 1.0.0'
 
-group :test do
+group :test, :development do
   gem 'factory_girl_rails'
+  gem 'rspec-rails', '~>3.0.0'
+  gem 'shoulda-matchers'
 end
 
 # To use ActiveModel has_secure_password
