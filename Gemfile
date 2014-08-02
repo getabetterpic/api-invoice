@@ -9,6 +9,7 @@ gem 'spring', :group => :development
 gem 'pg'
 gem 'devise'
 gem 'omniauth', '>= 1.0.0'
+gem 'awesome_print'
 
 group :test, :development do
   gem 'factory_girl_rails'
