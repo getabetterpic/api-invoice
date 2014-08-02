@@ -10,6 +10,10 @@ gem 'pg'
 gem 'devise'
 gem 'omniauth', '>= 1.0.0'
 
+group :test do
+  gem 'factory_girl_rails'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
