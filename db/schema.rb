@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140802010857) do
+ActiveRecord::Schema.define(version: 20140802153204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.text     "address"
+    t.string   "city"
+    t.string   "region"
+    t.string   "postal_code"
+    t.string   "country"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "website"
+    t.string   "internal_reference"
+    t.string   "external_reference"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "companies", ["external_reference"], name: "index_companies_on_external_reference", using: :btree
+  add_index "companies", ["internal_reference"], name: "index_companies_on_internal_reference", unique: true, using: :btree
+  add_index "companies", ["name"], name: "index_companies_on_name", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
