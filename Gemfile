@@ -15,7 +15,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~>3.0.0'
   gem 'shoulda-matchers'
-  gem 'guard-rspec'
+  gem 'guard-rspec', require: false
 end
 
 # To use ActiveModel has_secure_password
