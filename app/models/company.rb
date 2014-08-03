@@ -3,4 +3,5 @@ class Company < ActiveRecord::Base
   validates_presence_of :name, :internal_reference
   has_many :memberships
   has_many :users, through: :memberships
+  has_many :customers
 end

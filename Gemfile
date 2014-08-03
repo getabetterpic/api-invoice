@@ -10,6 +10,7 @@ gem 'pg'
 gem 'devise'
 gem 'omniauth', '>= 1.0.0'
 gem 'awesome_print'
+gem 'transitions', :require => ['transitions', 'active_model/transitions']
 
 group :test, :development do
   gem 'factory_girl_rails'
