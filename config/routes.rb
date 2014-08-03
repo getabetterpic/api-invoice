@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :invoices, except: [:new, :edit]
   resources :customers, except: [:new, :edit]
   resources :companies, except: [:new, :edit]
   devise_for :users
