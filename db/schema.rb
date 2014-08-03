@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140802194829) do
+ActiveRecord::Schema.define(version: 20140803001808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140802194829) do
     t.string   "external_reference"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   add_index "companies", ["external_reference"], name: "index_companies_on_external_reference", using: :btree
@@ -88,6 +89,7 @@ ActiveRecord::Schema.define(version: 20140802194829) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "status"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
