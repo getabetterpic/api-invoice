@@ -24,11 +24,16 @@ RSpec.describe CompaniesController, :type => :controller do
   # Company. As you add validations to Company, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "MyString",
+      internal_reference: "MyString"
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: "MyString"
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -39,7 +44,7 @@ RSpec.describe CompaniesController, :type => :controller do
   describe "GET index" do
     it "assigns all companies as @companies" do
       company = Company.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       expect(assigns(:companies)).to eq([company])
     end
   end
@@ -52,26 +57,11 @@ RSpec.describe CompaniesController, :type => :controller do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new company as @company" do
-      get :new, {}, valid_session
-      expect(assigns(:company)).to be_a_new(Company)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested company as @company" do
-      company = Company.create! valid_attributes
-      get :edit, {:id => company.to_param}, valid_session
-      expect(assigns(:company)).to eq(company)
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Company" do
         expect {
-          post :create, {:company => valid_attributes}, valid_session
+          post :create, {:company => valid_attributes}
         }.to change(Company, :count).by(1)
       end
 
@@ -83,7 +73,7 @@ RSpec.describe CompaniesController, :type => :controller do
 
       it "redirects to the created company" do
         post :create, {:company => valid_attributes}, valid_session
-        expect(response).to redirect_to(Company.last)
+        expect(response.status).to eq(201)
       end
     end
 
@@ -92,25 +82,23 @@ RSpec.describe CompaniesController, :type => :controller do
         post :create, {:company => invalid_attributes}, valid_session
         expect(assigns(:company)).to be_a_new(Company)
       end
-
-      it "re-renders the 'new' template" do
-        post :create, {:company => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name:                 "NewString",
+          internal_reference:   "Other Cool Reference"
+        }
       }
 
       it "updates the requested company" do
         company = Company.create! valid_attributes
         put :update, {:id => company.to_param, :company => new_attributes}, valid_session
         company.reload
-        skip("Add assertions for updated state")
+        expect(company.name).to eq(new_attributes[:name])
       end
 
       it "assigns the requested company as @company" do
@@ -122,7 +110,7 @@ RSpec.describe CompaniesController, :type => :controller do
       it "redirects to the company" do
         company = Company.create! valid_attributes
         put :update, {:id => company.to_param, :company => valid_attributes}, valid_session
-        expect(response).to redirect_to(company)
+        expect(response.status).to eq(204)
       end
     end
 
@@ -131,12 +119,6 @@ RSpec.describe CompaniesController, :type => :controller do
         company = Company.create! valid_attributes
         put :update, {:id => company.to_param, :company => invalid_attributes}, valid_session
         expect(assigns(:company)).to eq(company)
-      end
-
-      it "re-renders the 'edit' template" do
-        company = Company.create! valid_attributes
-        put :update, {:id => company.to_param, :company => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end
@@ -152,7 +134,7 @@ RSpec.describe CompaniesController, :type => :controller do
     it "redirects to the companies list" do
       company = Company.create! valid_attributes
       delete :destroy, {:id => company.to_param}, valid_session
-      expect(response).to redirect_to(companies_url)
+      expect(response.status).to eq(204)
     end
   end
 

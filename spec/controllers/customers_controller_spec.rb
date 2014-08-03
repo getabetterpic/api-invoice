@@ -24,11 +24,13 @@ RSpec.describe CustomersController, :type => :controller do
   # Customer. As you add validations to Customer, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      email: "something@somewhere.com"
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: "MyString" }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -52,21 +54,6 @@ RSpec.describe CustomersController, :type => :controller do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new customer as @customer" do
-      get :new, {}, valid_session
-      expect(assigns(:customer)).to be_a_new(Customer)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested customer as @customer" do
-      customer = Customer.create! valid_attributes
-      get :edit, {:id => customer.to_param}, valid_session
-      expect(assigns(:customer)).to eq(customer)
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Customer" do
@@ -83,7 +70,7 @@ RSpec.describe CustomersController, :type => :controller do
 
       it "redirects to the created customer" do
         post :create, {:customer => valid_attributes}, valid_session
-        expect(response).to redirect_to(Customer.last)
+        expect(response.status).to eq(201)
       end
     end
 
@@ -92,25 +79,22 @@ RSpec.describe CustomersController, :type => :controller do
         post :create, {:customer => invalid_attributes}, valid_session
         expect(assigns(:customer)).to be_a_new(Customer)
       end
-
-      it "re-renders the 'new' template" do
-        post :create, {:customer => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: "Something Cool"
+        }
       }
 
       it "updates the requested customer" do
         customer = Customer.create! valid_attributes
         put :update, {:id => customer.to_param, :customer => new_attributes}, valid_session
         customer.reload
-        skip("Add assertions for updated state")
+        expect(customer.name).to eq(new_attributes[:name])
       end
 
       it "assigns the requested customer as @customer" do
@@ -122,7 +106,7 @@ RSpec.describe CustomersController, :type => :controller do
       it "redirects to the customer" do
         customer = Customer.create! valid_attributes
         put :update, {:id => customer.to_param, :customer => valid_attributes}, valid_session
-        expect(response).to redirect_to(customer)
+        expect(response.status).to eq(204)
       end
     end
 
@@ -131,12 +115,6 @@ RSpec.describe CustomersController, :type => :controller do
         customer = Customer.create! valid_attributes
         put :update, {:id => customer.to_param, :customer => invalid_attributes}, valid_session
         expect(assigns(:customer)).to eq(customer)
-      end
-
-      it "re-renders the 'edit' template" do
-        customer = Customer.create! valid_attributes
-        put :update, {:id => customer.to_param, :customer => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end
@@ -152,7 +130,7 @@ RSpec.describe CustomersController, :type => :controller do
     it "redirects to the customers list" do
       customer = Customer.create! valid_attributes
       delete :destroy, {:id => customer.to_param}, valid_session
-      expect(response).to redirect_to(customers_url)
+      expect(response.status).to eq(204)
     end
   end
 

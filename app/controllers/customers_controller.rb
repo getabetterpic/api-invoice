@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
-    @customer = Customer.new(params[:customer])
+    @customer = Customer.new(customer_params)
 
     if @customer.save
       render json: @customer, status: :created, location: @customer
@@ -32,7 +32,7 @@ class CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
 
-    if @customer.update(params[:customer])
+    if @customer.update(customer_params)
       head :no_content
     else
       render json: @customer.errors, status: :unprocessable_entity
@@ -46,5 +46,23 @@ class CustomersController < ApplicationController
     @customer.destroy
 
     head :no_content
+  end
+
+  protected
+
+  def customer_params
+    params.require(:customer).permit(
+      :name,
+      :address,
+      :city,
+      :region,
+      :postal_code,
+      :country,
+      :reference,
+      :status,
+      :email,
+      :phone,
+      :company
+    )
   end
 end

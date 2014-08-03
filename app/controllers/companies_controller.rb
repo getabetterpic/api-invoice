@@ -18,7 +18,7 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(params[:company])
+    @company = Company.new(company_params)
 
     if @company.save
       render json: @company, status: :created, location: @company
@@ -32,7 +32,7 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:id])
 
-    if @company.update(params[:company])
+    if @company.update(company_params)
       head :no_content
     else
       render json: @company.errors, status: :unprocessable_entity
@@ -46,5 +46,23 @@ class CompaniesController < ApplicationController
     @company.destroy
 
     head :no_content
+  end
+
+  protected
+
+  def company_params
+    params
+      .require(:company)
+        .permit(
+      :name,
+      :address,
+      :city,
+      :region,
+      :postal_code,
+      :country,
+      :status,
+      :internal_reference,
+      :external_reference
+    )
   end
 end
