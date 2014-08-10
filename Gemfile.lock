@@ -47,6 +47,7 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    ffaker (1.24.0)
     ffi (1.9.3)
     formatador (0.2.5)
     guard (2.6.1)
@@ -162,6 +163,7 @@ DEPENDENCIES
   awesome_print
   devise
   factory_girl_rails
+  ffaker
   guard-rspec
   omniauth (>= 1.0.0)
   pg

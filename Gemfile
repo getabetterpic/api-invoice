@@ -17,6 +17,7 @@ group :test, :development do
   gem 'rspec-rails', '~>3.0.0'
   gem 'shoulda-matchers'
   gem 'guard-rspec', require: false
+  gem 'ffaker'
 end
 
 # To use ActiveModel has_secure_password
