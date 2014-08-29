@@ -7,16 +7,8 @@ RSpec.describe InvoiceLinesController, :type => :routing do
       expect(:get => "/invoice_lines").to route_to("invoice_lines#index")
     end
 
-    it "routes to #new" do
-      expect(:get => "/invoice_lines/new").to route_to("invoice_lines#new")
-    end
-
     it "routes to #show" do
       expect(:get => "/invoice_lines/1").to route_to("invoice_lines#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      expect(:get => "/invoice_lines/1/edit").to route_to("invoice_lines#edit", :id => "1")
     end
 
     it "routes to #create" do

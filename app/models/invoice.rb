@@ -3,8 +3,9 @@ class Invoice < ActiveRecord::Base
 
   validates_presence_of :invoice_date, :status
   belongs_to :customer
+  has_many :invoice_lines
 
   state_machine attribute_name: :status do
-    state :active
+    state :open
   end
 end

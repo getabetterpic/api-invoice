@@ -18,7 +18,7 @@ class InvoiceLinesController < ApplicationController
   # POST /invoice_lines
   # POST /invoice_lines.json
   def create
-    @invoice_line = InvoiceLine.new(params[:invoice_line])
+    @invoice_line = InvoiceLine.new(invoice_line_params)
 
     if @invoice_line.save
       render json: @invoice_line, status: :created, location: @invoice_line
@@ -32,7 +32,7 @@ class InvoiceLinesController < ApplicationController
   def update
     @invoice_line = InvoiceLine.find(params[:id])
 
-    if @invoice_line.update(params[:invoice_line])
+    if @invoice_line.update(invoice_line_params)
       head :no_content
     else
       render json: @invoice_line.errors, status: :unprocessable_entity
@@ -46,5 +46,17 @@ class InvoiceLinesController < ApplicationController
     @invoice_line.destroy
 
     head :no_content
+  end
+
+  protected
+
+  def invoice_line_params
+    params.require(:invoice_line).permit(
+      :description,
+      :units,
+      :unit_price,
+      :line_amount,
+      :status
+    )
   end
 end

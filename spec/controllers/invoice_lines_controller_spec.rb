@@ -24,11 +24,15 @@ RSpec.describe InvoiceLinesController, :type => :controller do
   # InvoiceLine. As you add validations to InvoiceLine, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      units: 3,
+      unit_price: 2.50,
+      line_amount: 7.50
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {status: 'Active'}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -52,21 +56,6 @@ RSpec.describe InvoiceLinesController, :type => :controller do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new invoice_line as @invoice_line" do
-      get :new, {}, valid_session
-      expect(assigns(:invoice_line)).to be_a_new(InvoiceLine)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested invoice_line as @invoice_line" do
-      invoice_line = InvoiceLine.create! valid_attributes
-      get :edit, {:id => invoice_line.to_param}, valid_session
-      expect(assigns(:invoice_line)).to eq(invoice_line)
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new InvoiceLine" do
@@ -81,9 +70,9 @@ RSpec.describe InvoiceLinesController, :type => :controller do
         expect(assigns(:invoice_line)).to be_persisted
       end
 
-      it "redirects to the created invoice_line" do
+      it "returns a 201 status" do
         post :create, {:invoice_line => valid_attributes}, valid_session
-        expect(response).to redirect_to(InvoiceLine.last)
+        expect(response.status).to eq(201)
       end
     end
 
@@ -95,7 +84,7 @@ RSpec.describe InvoiceLinesController, :type => :controller do
 
       it "re-renders the 'new' template" do
         post :create, {:invoice_line => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        expect(response.status).to eq(422)
       end
     end
   end
@@ -103,14 +92,18 @@ RSpec.describe InvoiceLinesController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          units: 2,
+          unit_price: 2.50,
+          line_amount: 5.00
+        }
       }
 
       it "updates the requested invoice_line" do
         invoice_line = InvoiceLine.create! valid_attributes
         put :update, {:id => invoice_line.to_param, :invoice_line => new_attributes}, valid_session
         invoice_line.reload
-        skip("Add assertions for updated state")
+        expect(response.status).to eq(204)
       end
 
       it "assigns the requested invoice_line as @invoice_line" do
@@ -119,10 +112,10 @@ RSpec.describe InvoiceLinesController, :type => :controller do
         expect(assigns(:invoice_line)).to eq(invoice_line)
       end
 
-      it "redirects to the invoice_line" do
+      it "returns a 204 status" do
         invoice_line = InvoiceLine.create! valid_attributes
         put :update, {:id => invoice_line.to_param, :invoice_line => valid_attributes}, valid_session
-        expect(response).to redirect_to(invoice_line)
+        expect(response.status).to eq(204)
       end
     end
 
@@ -131,12 +124,6 @@ RSpec.describe InvoiceLinesController, :type => :controller do
         invoice_line = InvoiceLine.create! valid_attributes
         put :update, {:id => invoice_line.to_param, :invoice_line => invalid_attributes}, valid_session
         expect(assigns(:invoice_line)).to eq(invoice_line)
-      end
-
-      it "re-renders the 'edit' template" do
-        invoice_line = InvoiceLine.create! valid_attributes
-        put :update, {:id => invoice_line.to_param, :invoice_line => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end
@@ -147,12 +134,6 @@ RSpec.describe InvoiceLinesController, :type => :controller do
       expect {
         delete :destroy, {:id => invoice_line.to_param}, valid_session
       }.to change(InvoiceLine, :count).by(-1)
-    end
-
-    it "redirects to the invoice_lines list" do
-      invoice_line = InvoiceLine.create! valid_attributes
-      delete :destroy, {:id => invoice_line.to_param}, valid_session
-      expect(response).to redirect_to(invoice_lines_url)
     end
   end
 
