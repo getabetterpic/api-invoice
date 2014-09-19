@@ -56,7 +56,8 @@ class InvoiceLinesController < ApplicationController
       :units,
       :unit_price,
       :line_amount,
-      :status
+      :status,
+      :invoice_id
     )
   end
 end

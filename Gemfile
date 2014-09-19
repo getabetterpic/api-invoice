@@ -11,6 +11,8 @@ gem 'devise'
 gem 'omniauth', '>= 1.0.0'
 gem 'awesome_print'
 gem 'transitions', :require => ['transitions', 'active_model/transitions']
+gem 'active_model_serializers', '0.8.2'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :test, :development do
   gem 'factory_girl_rails'

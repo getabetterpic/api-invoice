@@ -11,7 +11,6 @@ class InvoicesController < ApplicationController
   # GET /invoices/1.json
   def show
     @invoice = Invoice.find(params[:id])
-
     render json: @invoice
   end
 
@@ -55,7 +54,9 @@ class InvoicesController < ApplicationController
       :invoice_date,
       :status,
       :description,
-      :revision
+      :revision,
+      :terms,
+      :customer_id
     )
   end
 end

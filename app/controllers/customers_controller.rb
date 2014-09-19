@@ -10,9 +10,9 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
-    @customer = Customer.find(params[:id])
+    @customer = Customer.includes(:invoices).find(params[:id])
 
-    render json: @customer
+    render json: @customer, meta: {invoice_count: @customer.invoices.count}
   end
 
   # POST /customers
@@ -23,7 +23,8 @@ class CustomersController < ApplicationController
     if @customer.save
       render json: @customer, status: :created, location: @customer
     else
-      render json: @customer.errors, status: :unprocessable_entity
+      ap errors(@customer.errors)
+      render json: errors(@customer.errors), status: :unprocessable_entity
     end
   end
 
