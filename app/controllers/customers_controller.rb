@@ -2,7 +2,7 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    @customers = Customer.includes(:invoices).order(:name).all
 
     render json: @customers
   end
@@ -12,7 +12,7 @@ class CustomersController < ApplicationController
   def show
     @customer = Customer.includes(:invoices).find(params[:id])
 
-    render json: @customer, meta: {invoice_count: @customer.invoices.count}
+    render json: @customer
   end
 
   # POST /customers

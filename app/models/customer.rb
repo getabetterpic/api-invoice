@@ -1,7 +1,7 @@
 class Customer < ActiveRecord::Base
   include ActiveModel::Transitions
 
-  validates_presence_of :email, :status
+  validates_presence_of :status
   validates_uniqueness_of :reference, scope: :company_id, allow_blank: true
   belongs_to :company
   has_many :invoices

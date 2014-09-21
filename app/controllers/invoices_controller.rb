@@ -56,7 +56,8 @@ class InvoicesController < ApplicationController
       :description,
       :revision,
       :terms,
-      :customer_id
+      :customer_id,
+      :notes
     )
   end
 end
