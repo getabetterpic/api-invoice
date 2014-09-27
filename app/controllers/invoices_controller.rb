@@ -1,4 +1,7 @@
 class InvoicesController < ApplicationController
+  include ActionController::MimeResponds
+  include PdfHelper
+  include WickedPdfHelper::Assets
   # GET /invoices
   # GET /invoices.json
   def index
@@ -11,7 +14,10 @@ class InvoicesController < ApplicationController
   # GET /invoices/1.json
   def show
     @invoice = Invoice.find(params[:id])
-    render json: @invoice
+    respond_to do |format|
+      format.html
+      format.json { render json: @invoice }
+    end
   end
 
   # POST /invoices

@@ -13,6 +13,8 @@ gem 'awesome_print'
 gem 'transitions', :require => ['transitions', 'active_model/transitions']
 gem 'active_model_serializers', '0.8.2'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'wicked_pdf'
+gem 'unicorn'
 
 group :test, :development do
   gem 'factory_girl_rails'
