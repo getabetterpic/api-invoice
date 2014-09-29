@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929221931) do
+ActiveRecord::Schema.define(version: 20140929222219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "applied_payments", force: true do |t|
+    t.integer  "payment_id"
+    t.integer  "invoice_id"
+    t.decimal  "amount"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "applied_payments", ["invoice_id"], name: "index_applied_payments_on_invoice_id", using: :btree
+  add_index "applied_payments", ["payment_id"], name: "index_applied_payments_on_payment_id", using: :btree
 
   create_table "companies", force: true do |t|
     t.string   "name"
