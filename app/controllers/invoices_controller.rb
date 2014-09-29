@@ -1,7 +1,6 @@
 class InvoicesController < ApplicationController
   include ActionController::MimeResponds
   include PdfHelper
-  include WickedPdfHelper::Assets
   # GET /invoices
   # GET /invoices.json
   def index

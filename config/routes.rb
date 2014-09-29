@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :invoice_lines, except: [:new, :edit]
-  resources :invoices, except: [:new, :edit], defaults: {format: :json}
+  resources :invoices, except: [:new, :edit]
   resources :customers, except: [:new, :edit]
   resources :companies, except: [:new, :edit]
   devise_for :users
