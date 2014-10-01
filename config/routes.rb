@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :invoices, except: [:new, :edit]
   resources :customers, except: [:new, :edit]
   resources :companies, except: [:new, :edit]
+  resources :payments, except: [:new, :edit]
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

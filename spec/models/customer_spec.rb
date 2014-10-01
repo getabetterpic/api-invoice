@@ -5,4 +5,5 @@ RSpec.describe Customer, :type => :model do
   it { should belong_to :company }
   it { should validate_uniqueness_of(:reference).scoped_to(:company_id).allow_nil }
   it { should have_many :invoices }
+  it { should have_many :payments }
 end
