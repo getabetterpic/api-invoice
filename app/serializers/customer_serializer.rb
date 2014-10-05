@@ -5,4 +5,5 @@ class CustomerSerializer < ActiveModel::Serializer
     :postal_code, :country, :reference, :status,
     :email, :phone, :company_id, :created_at, :updated_at
   has_many :invoices, key: :invoices
+  has_many :payments, key: :payments
 end

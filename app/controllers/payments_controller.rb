@@ -10,7 +10,7 @@ class PaymentsController < ApplicationController
   # GET /payments/1
   # GET /payments/1.json
   def show
-    @payment = Payment.find(params[:id])
+    @payment = Payment.find(params[:id].split(","))
 
     render json: @payment
   end
